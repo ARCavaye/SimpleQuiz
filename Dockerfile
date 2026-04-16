@@ -1,4 +1,4 @@
-# Dockerfile for MediQuiz (React frontend)
+# Dockerfile for SimpleQuiz (React frontend)
 FROM node:25-alpine
 
 WORKDIR /app
