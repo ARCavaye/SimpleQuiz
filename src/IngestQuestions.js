@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Alert, Paper } from '@mui/material';
 import { API_URL } from './config';
 
-export default function IngestQuestions() {
+export default function IngestQuestions({ onSuccess }) {
   const [jsonInput, setJsonInput] = useState('');
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
@@ -27,6 +27,9 @@ export default function IngestQuestions() {
       const resData = await res.json();
       if (res.ok) {
         setResult(`Successfully ingested ${resData.count} question(s).`);
+        if (onSuccess) {
+          onSuccess();
+        }
       } else {
         setError(JSON.stringify(resData));
       }

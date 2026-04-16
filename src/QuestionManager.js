@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress, Alert } from '@mui/material';
+import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, CircularProgress, Alert, Collapse } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { API_URL } from './config';
+import IngestQuestions from './IngestQuestions';
 
 function EditDialog({ open, question, onClose, onSave }) {
   const [form, setForm] = useState(question || {});
@@ -40,6 +41,7 @@ export default function QuestionManager() {
   const [editOpen, setEditOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [showIngest, setShowIngest] = useState(false);
 
   const fetchQuestions = async () => {
     setLoading(true);
@@ -94,6 +96,16 @@ export default function QuestionManager() {
   return (
     <Box>
       <Typography variant="h5" sx={{ mb: 2 }}>Question Manager</Typography>
+      <Box sx={{ mb: 2 }}>
+        <Button variant="contained" onClick={() => setShowIngest(!showIngest)}>
+          {showIngest ? 'Hide Ingest Questions' : 'Ingest Questions'}
+        </Button>
+      </Box>
+      <Collapse in={showIngest} timeout="auto" unmountOnExit>
+        <Paper sx={{ p: 2, mb: 2 }}>
+          <IngestQuestions onSuccess={fetchQuestions} />
+        </Paper>
+      </Collapse>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       {loading ? <CircularProgress /> : (
         <TableContainer component={Paper}>

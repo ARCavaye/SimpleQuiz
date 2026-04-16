@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Container, Box, Tabs, Tab, Avatar } from '@mui/material';
-import IngestQuestions from './IngestQuestions';
 import QuestionManager from './QuestionManager';
 import QuizInterface from './QuizInterface';
 import ResultsInterface from './ResultsInterface';
@@ -44,7 +43,6 @@ function App() {
           }}
         >
           <Tab label="Take Quiz" />
-          <Tab label="Ingest Questions" />
           <Tab label="Results" />
           <Tab label="Question Manager" />
         </Tabs>
@@ -57,16 +55,10 @@ function App() {
         )}
         {tab === 1 && (
           <Box>
-            <Typography variant="h5">Ingest Questions</Typography>
-            <IngestQuestions />
-          </Box>
-        )}
-        {tab === 2 && (
-          <Box>
             <ResultsInterface />
           </Box>
         )}
-        {tab === 3 && (
+        {tab === 2 && (
           <Box>
             <QuestionManager />
           </Box>
