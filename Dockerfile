@@ -1,5 +1,5 @@
 # Dockerfile for MediQuiz (React frontend)
-FROM node:18-alpine
+FROM node:25-alpine
 
 WORKDIR /app
 
